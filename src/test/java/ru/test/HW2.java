@@ -36,4 +36,29 @@ public class HW2 {
         driver.quit();
 
     }
+
+    @Test
+    public void fieldText() throws InterruptedException, MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("deviceName", "GB");
+        capabilities.setCapability("platformName ", "Android");
+        capabilities.setCapability("platformVersion", "9.0");
+        capabilities.setCapability("automationName", "uiAutomator2");
+        capabilities.setCapability("udid", "emulator-5554");
+        capabilities.setCapability("app", "C:\\Users\\Rick\\Downloads\\Android-NativeDemoApp-0.2.1.apk");
+
+        MobileDriver driver = new AndroidDriver(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+
+        MobileElement loginMenuButton = (MobileElement) driver.findElementByAccessibilityId("Login");
+        loginMenuButton.click();
+        Thread.sleep(2000);
+        MobileElement singUpTab = (MobileElement) driver.findElementByAccessibilityId("button-sign-up-container");
+        singUpTab.click();
+        Thread.sleep(2000);
+        MobileElement fieldText = (MobileElement) driver.findElementByXPath("//android.view.ViewGroup[@content-desc=\"button-SIGN UP\"]/android.view.ViewGroup/android.widget.TextView");
+        Assert.assertEquals(fieldText.getText(), "SIGN UP");
+
+        driver.quit();
+
+    }
 }
